@@ -8,3 +8,4 @@ Small app which changing your telegram status and description while listening sp
 2. UPDATE PHOTO TELEGRAM
 3. REFACTORING
 4. JOB WORK UPDATE REQUEST EVERY 3 min
+5. UPDATE TOKEN SPOTIFY

@@ -17,7 +17,7 @@ var spotifyApi = new SpotifyWebApi({
     clientSecret: '8febd347a0ce4380b27fb6a873ab092f',    
   });
 
-  spotifyApi.setAccessToken('BQBhgpk_gd0oAaVjKZ6GvlEuWsY1apn3VwCjp-4rSlXYDksEDLALDBxgNcfr_oBP-UXDhGcomsJywqR92rBaCdIyw5WGGv9uc88522th-_LlQ41sn2wgNzIH3jAI3LwtFduZNcSgyzVHJTE3U7pQLFwd24pjjc3qXuYn4Fr4C_QavpCCIPhzczXTeldtY8WgUaEiydxQPWPaQXXVhRrE_hBBTPHZfgmtsQUKIFRcTFah_hIHJxz8w8Qva_WxlRF4WNkvST4FPwMmo2pcXfSJ54fh4gIoUl1PuRsh9Z4C');
+  spotifyApi.setAccessToken('BQAG4Gcpj8m-_ITpLKTVY9FaRCpqJLUUGJRTWuqhcUJLs8pXJ8PLAYQZtWshFRdkDSDxVvGfwE_LwHawj3ITD1bUH3PXJeZMw6DS-Vx6PO9PmokmRDdSSRu2GqqMjMn9AX9oGlS5UKcP1jhfXDUKh6ZpKuYHb5UeRD_LqkYsvETRVBv5xyUl4JCjwtLrm3j5jr7tpprBmouniukvRMWL5p-s84KT_CMdtzQCnFoemCXwuAfLxIw7_kO9DlEN0rzX1X7NFxLVDux1pno3IoRfYPJvVoWX121LS0EGGsz4');
 
   async function updateUserPhoto() {
     try {
@@ -58,10 +58,10 @@ async function updateUser() {
     try {
         spotifyApi.getMyCurrentPlayingTrack().then(
             function(data) {
-              console.log(data.body.item.album.images[0].url)
+              console.log(data.body.item.album)
                 const user =  api.call('account.updateProfile', {
                     flags: 33561723,
-                    first_name: data.body.item.name,
+                    first_name: `${data.body.item.name} ${data.body.item.album.name}`,
                     
                     about: data.body.item.name
                   });             
