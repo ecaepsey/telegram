@@ -6,3 +6,4 @@ Small app which changing your telegram status and description while listening sp
 
 1. REMOVE API KEYS TO FILE
 2. UPDATE PHOTO TELEGRAM
+3. REFACTORING
