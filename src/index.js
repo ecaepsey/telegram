@@ -1,6 +1,11 @@
 import api from './api'
 var SpotifyWebApi = require('spotify-web-api-node');
 
+const express = require('express')
+const app = express()
+const port = 3000
+
+
 var http = require('https'),
     fs = require('fs')
 
@@ -12,10 +17,7 @@ var spotifyApi = new SpotifyWebApi({
     clientSecret: '8febd347a0ce4380b27fb6a873ab092f',    
   });
 
-  spotifyApi.setAccessToken('BQDbIKBnJ_U-NGkNIEp8dGhZAHNo4NJ5DY2AB3fxKe1Gly0v8srC_gZbp1M7AqSD4QsZY9Aga7Bs9SMkbahsDWzZbyuAcZ_KpBiCSNTEhmZLhXAihAlfAd83YcycZxdG8D3hJAIn5K0M9Bj1GFsWU8_yTeO92Za-iQ_VnLYj-jkdDfHMo8N3D4cn4O9dwEQt9dND6e_XSJngPsWkQmrxXrKI5rHKXGD7-2UygjWcctz0QPIXLormOyL1fsAWRgmrOUrd8HNspEydsObkcdQ292L1mczJ4HKxx5yjv-zh');
-
-
-
+  spotifyApi.setAccessToken('BQBhgpk_gd0oAaVjKZ6GvlEuWsY1apn3VwCjp-4rSlXYDksEDLALDBxgNcfr_oBP-UXDhGcomsJywqR92rBaCdIyw5WGGv9uc88522th-_LlQ41sn2wgNzIH3jAI3LwtFduZNcSgyzVHJTE3U7pQLFwd24pjjc3qXuYn4Fr4C_QavpCCIPhzczXTeldtY8WgUaEiydxQPWPaQXXVhRrE_hBBTPHZfgmtsQUKIFRcTFah_hIHJxz8w8Qva_WxlRF4WNkvST4FPwMmo2pcXfSJ54fh4gIoUl1PuRsh9Z4C');
 
   async function updateUserPhoto() {
     try {
@@ -24,29 +26,14 @@ var spotifyApi = new SpotifyWebApi({
 
                 http.get(data.body.item.album.images[0].url, function(res) {
                     const file =  api.call('photos.uploadProfilePhoto', {
-                    
-                    
                         flags: 33561723,
                         file:  res.pipe(fs.createWriteStream('wiki.jpeg'))
                         
                         
                       }); 
                       console.log(file)       
-
-
-                    
                   });
-                  
-                  
-                
-               
-
-               
-              
-                
-             
-                
-
+     
                 console.log(data.body.item.album.images[0])
                 // const user =  api.call('photos.uploadProfilePhoto', {
                 //     flags: 33561723,
@@ -71,11 +58,11 @@ async function updateUser() {
     try {
         spotifyApi.getMyCurrentPlayingTrack().then(
             function(data) {
-             
+              console.log(data.body.item.album.images[0].url)
                 const user =  api.call('account.updateProfile', {
                     flags: 33561723,
                     first_name: data.body.item.name,
-
+                    
                     about: data.body.item.name
                   });             
                
@@ -140,22 +127,21 @@ async function getUser() {
   const { getSRPParams } = require('@mtproto/core');
   
   const phone = '+996555903140';
-  const code = '79270';
+  const code = '33868';
   const password = '3776286';
   
+
+
+
+  
+app.listen(port, () => {
   (async () => {
     
     await updateUser()
-
     // await updateUserPhoto()
-
     const user = await getUser();
-
-    
-  
     if (!user) {
       const { phone_code_hash } = await sendCode(phone);
-  
       try {
         const authResult = await signIn({
           code,
@@ -189,3 +175,8 @@ async function getUser() {
       }
     }
   })();
+
+
+
+  console.log(`Example app listening at http://localhost:${port}`)
+})

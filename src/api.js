@@ -1,9 +1,13 @@
 const { MTProto } = require('@mtproto/core');
 const { sleep } = require('@mtproto/core/src/utils/common');
-
+const path = require('path')
 const mtproto = new MTProto({
   api_id: "3776286",
   api_hash: "9992bcd0ae86470d30cc6786d53c23d4",
+  
+  storageOptions: {
+    path: path.resolve(__dirname, './data/1.json'),
+  },
 });
 
 const api = {
